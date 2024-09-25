@@ -1,13 +1,11 @@
-const urlPostKommune = "http://localhost:8080/kommune"
+const urlPostKommune = "http://localhost:8080/region"
 
-function createKommune() {
-    const kommune = {}
-    kommune.kode = "2776"
-    kommune.navn = "KEAxxx"
-    kommune.href = "http:kea"
-    kommune.region = {}
-    kommune.region.kode = "1081"
-    return kommune;
+function createRegion() {
+    const region = {}
+    region.kode = "8845"
+    region.navn = "KEA"
+    region.href = "httpkea"
+    return region;
 }
 
 async function postDataAsJson(url, obj) {
@@ -38,7 +36,7 @@ async function postkommune() {
 
 }
 
-const kom1 = createKommune()
+const kom1 = createRegion()
 console.log(kom1)
 postkommune();
 
