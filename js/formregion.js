@@ -1,5 +1,5 @@
-const urlPostKommune = "http://localhost:8080/kommune"
-console.log("jeg er i formkommune")
+const urlPostRegion = "http://localhost:8080/region"
+console.log("jeg er i formregion")
 
 document.addEventListener('DOMContentLoaded', createFormEventListener);
 let formKommune;
@@ -31,12 +31,6 @@ async function postObjectAsJson(url, object, httpVerbum) {
 async function postFormDataAsJson(url, formData) {
     const plainFormData = Object.fromEntries(formData.entries());
     console.log(plainFormData)
-
-    //sæt region på
-    plainFormData.region = {}
-    plainFormData.region.kode = "1081"
-
-
     const response = await postObjectAsJson(url, plainFormData, "POST");
     if (!response.ok) {
         const errorMessage = await response.text();
@@ -53,7 +47,7 @@ async function handleFormSubmit(event) {
     event.preventDefault();
     const form = event.currentTarget;
     //const url = form.action;
-    const url = urlPostKommune;
+    const url = urlPostRegion;
     console.log(form);
     console.log(url);
     try {

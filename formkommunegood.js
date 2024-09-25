@@ -1,4 +1,4 @@
-const urlPostKommune = "http://localhost:8080/kommune"
+const urlPostRegion = "http://localhost:8080/region"
 console.log("jeg er i formkommune")
 
 document.addEventListener('DOMContentLoaded', createFormEventListener);
@@ -9,16 +9,26 @@ function createFormEventListener() {
     formKommune.addEventListener("submit", handleFormSubmit);
 }
 
-async function postObjectAsJson(url, object, httpVerbum) {
-    const objectAsJsonString = JSON.stringify(object);
+function createRegion() {
+    const region = {}
+    region.kode = "8935"
+    region.navn = "KEA"
+    region.href = "httpkea"
+    return region;
+}
+
+
+async function postDataAsJson(url, region) {
+    const objectAsJsonString = JSON.stringify(region);
     console.log(objectAsJsonString);
     const fetchOptions = {
-        method: httpVerbum,
+        method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
         body: objectAsJsonString,
     };
+    debugger
     const response = await fetch(url, fetchOptions);
     if (!response.ok) {
         const errorMessage = await response.text();
@@ -32,12 +42,9 @@ async function postFormDataAsJson(url, formData) {
     const plainFormData = Object.fromEntries(formData.entries());
     console.log(plainFormData)
 
-    //sæt region på
-    plainFormData.region = {}
-    plainFormData.region.kode = "1081"
+    const rgg = createRegion();
 
-
-    const response = await postObjectAsJson(url, plainFormData, "POST");
+    const response = await postDataAsJson(url, rgg);
     if (!response.ok) {
         const errorMessage = await response.text();
         console.error(errorMessage);
@@ -48,12 +55,12 @@ async function postFormDataAsJson(url, formData) {
     }
 }
 
+
 async function handleFormSubmit(event) {
     //Vi handler submitten her i stedet for default html behaviour
     event.preventDefault();
     const form = event.currentTarget;
-    //const url = form.action;
-    const url = urlPostKommune;
+    const url = form.action;
     console.log(form);
     console.log(url);
     try {
@@ -65,5 +72,6 @@ async function handleFormSubmit(event) {
         console.error(error);
     }
 }
+
 
 
