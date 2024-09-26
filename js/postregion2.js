@@ -27,7 +27,6 @@ async function postDataAsJson(url, obj) {
         //vi har fået response fra backend
         console.log(response.json())
     }
-
 }
 
 async function postkommune() {
