@@ -34,7 +34,7 @@ async function postFormDataAsJson(url, formData) {
 
     //sæt region på
     plainFormData.region = {}
-    plainFormData.region.kode = "1081"
+    plainFormData.region.kode = plainFormData.regionKode; //"1081"
 
 
     const response = await postObjectAsJson(url, plainFormData, "POST");
